@@ -1,0 +1,62 @@
+{
+  "id": "listicle",
+  "name": "Listicle",
+  "bucket": "Lists and rankings",
+  "order": 4,
+  "tagline": "N things, each one landing on screen as you say it.",
+  "best_for": "Tips, tools, mistakes, steps: anything that starts with a number.",
+  "look": "A headline promises the list, then every item lands as a frozen frame with a numbered callout or a checklist that ticks as you say it. Explanations between items punch in, so the rhythm reads item, explain, item.",
+  "signature": [
+    "title-lockup",
+    "freeze-label",
+    "checklist",
+    "digital-zoom"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "bold",
+    "caption_words": 2,
+    "grade": "punchy"
+  },
+  "pace": {
+    "big_every": 5,
+    "min_gap": 1.2,
+    "punch": "alternate",
+    "punch_scale": 1.12
+  },
+  "beats": {
+    "hook": [
+      {"effect": "intro-thumbnail-arch", "needs": "cutout"},
+      {"effect": "text-explosion"}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "digital-zoom", "params": { "scale": "1.10", "mode": "plain" }},
+        {"effect": "none"}
+      ]
+    },
+    "contrast": [
+      {"effect": "before-after"}
+    ],
+    "list": {
+      "rotate": [
+        {"effect": "freeze-label"},
+        {"effect": "checklist", "if": "items"}
+      ]
+    },
+    "proof": [
+      {"effect": "chart-grow", "if": "growth"},
+      {"effect": "popups"}
+    ],
+    "tools": [
+      {"effect": "popups", "params": { "variant": "plugin" }}
+    ],
+    "punch": [
+      {"effect": "spotlight"}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

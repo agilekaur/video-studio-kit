@@ -1,0 +1,55 @@
+{
+  "id": "fitted-captions",
+  "name": "Fitted Captions",
+  "bucket": "Type-led",
+  "order": 10,
+  "tagline": "One huge accent word per line, the rest fitted around it.",
+  "best_for": "Strong opinions and punchy talking points where the words do the work.",
+  "look": "No graphics, just typography. The strongest word in each line is set huge in the accent, with the other words stacked above and below it. Punch-ins keep the rhythm, a spotlight lands the punch line and the close hits word by word.",
+  "signature": [
+    "digital-zoom",
+    "spotlight",
+    "kinetic-cta"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "fitted",
+    "caption_words": 4,
+    "grade": "punchy"
+  },
+  "pace": {
+    "big_every": 12,
+    "min_gap": 3.0,
+    "punch": "alternate",
+    "punch_scale": 1.12
+  },
+  "beats": {
+    "hook": [
+      {"effect": "digital-zoom", "params": { "scale": "1.25", "mode": "viewfinder" }}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "none"},
+        {"effect": "digital-zoom", "params": { "scale": "1.10", "mode": "stepped" }}
+      ]
+    },
+    "contrast": [
+      {"effect": "spotlight"}
+    ],
+    "list": [
+      {"effect": "none"}
+    ],
+    "proof": [
+      {"effect": "none"}
+    ],
+    "tools": [
+      {"effect": "none"}
+    ],
+    "punch": [
+      {"effect": "spotlight"}
+    ],
+    "cta": [
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

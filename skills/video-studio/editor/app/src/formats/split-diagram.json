@@ -1,0 +1,53 @@
+{
+  "id": "split-diagram",
+  "name": "Split Diagram",
+  "bucket": "Explainers",
+  "order": 9,
+  "tagline": "Your face on top, a diagram building underneath as you talk.",
+  "best_for": "Systems, funnels, workflows: anything with boxes and arrows.",
+  "look": "The frame is split at the seam, with you framed tight on top. Underneath, the diagram for each line draws itself: flows with arrows, bars growing to your numbers, loops and stacks. A small mono caption rides the seam.",
+  "signature": [
+    "split-diagram",
+    "title-lockup",
+    "kinetic-cta"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "bold",
+    "caption_words": 3,
+    "grade": "none"
+  },
+  "pace": {
+    "big_every": 8,
+    "min_gap": 2.0,
+    "punch": "none",
+    "punch_scale": 1.0
+  },
+  "beats": {
+    "hook": [
+      {"effect": "split-diagram", "params": { "kind": "auto" }}
+    ],
+    "point": [
+      {"effect": "split-diagram", "params": { "kind": "auto" }}
+    ],
+    "contrast": [
+      {"effect": "split-diagram", "params": { "kind": "bars" }}
+    ],
+    "list": [
+      {"effect": "split-diagram", "params": { "kind": "flow" }}
+    ],
+    "proof": [
+      {"effect": "split-diagram", "params": { "kind": "bars" }}
+    ],
+    "tools": [
+      {"effect": "split-diagram", "params": { "kind": "flow" }}
+    ],
+    "punch": [
+      {"effect": "split-diagram", "params": { "kind": "stack" }}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "tool-demo",
+  "name": "Tool Demo",
+  "bucket": "Tools and product",
+  "order": 5,
+  "tagline": "The real interface lives around you: prompts, chats and results.",
+  "best_for": "Showing an AI tool, an automation or your own product doing the work.",
+  "look": "You are cut out, with the interface around and behind you. Chat bubbles pop over a shoulder, a prompt types and counts down to a result, and a phone chat plays out above you. The headline word sits behind your head.",
+  "signature": [
+    "ui-world",
+    "prompt-countdown-result",
+    "phone-chat",
+    "mock-app-window"
+  ],
+  "cutout": true,
+  "settings": {
+    "caption_style": "glass",
+    "caption_words": 3,
+    "grade": "soft"
+  },
+  "pace": {
+    "big_every": 5,
+    "min_gap": 1.2,
+    "punch": "alternate",
+    "punch_scale": 1.1
+  },
+  "beats": {
+    "hook": [
+      {"effect": "ui-world", "needs": "cutout"},
+      {"effect": "prompt-countdown-result"}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "none"},
+        {"effect": "ui-world", "needs": "cutout"},
+        {"effect": "seam-caption-mono"}
+      ]
+    },
+    "contrast": [
+      {"effect": "before-after"}
+    ],
+    "list": [
+      {"effect": "mock-app-window"}
+    ],
+    "proof": [
+      {"effect": "proof-pushin"}
+    ],
+    "tools": {
+      "rotate": [
+        {"effect": "prompt-countdown-result"},
+        {"effect": "ui-world", "needs": "cutout"},
+        {"effect": "phone-chat"},
+        {"effect": "layout-switcher"}
+      ]
+    },
+    "punch": [
+      {"effect": "digital-zoom", "params": { "scale": "1.25", "mode": "plain" }}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

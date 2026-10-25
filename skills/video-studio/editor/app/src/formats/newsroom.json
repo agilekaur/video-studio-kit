@@ -1,0 +1,62 @@
+{
+  "id": "newsroom",
+  "name": "Newsroom",
+  "bucket": "Cut-out and collage",
+  "order": 16,
+  "tagline": "Breaking-news energy: you cut out over headlines and the source.",
+  "best_for": "AI and industry news, launches, \"this just changed\" updates.",
+  "look": "Fast and urgent. The story's keyword is set as a masthead behind your head, keyword walls scroll behind you, and the source article pushes in with the key line highlighted. The punch word shatters.",
+  "signature": [
+    "cover-story",
+    "headline-wall",
+    "proof-pushin",
+    "text-explosion"
+  ],
+  "cutout": true,
+  "settings": {
+    "caption_style": "boxed",
+    "caption_words": 3,
+    "grade": "punchy"
+  },
+  "pace": {
+    "big_every": 5,
+    "min_gap": 1.2,
+    "punch": "alternate",
+    "punch_scale": 1.1
+  },
+  "beats": {
+    "hook": [
+      {"effect": "cover-story"}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "headline-wall", "needs": "cutout"},
+        {"effect": "none"},
+        {"effect": "proof-pushin"},
+        {"effect": "none"}
+      ]
+    },
+    "contrast": [
+      {"effect": "before-after"}
+    ],
+    "list": [
+      {"effect": "freeze-label"}
+    ],
+    "proof": {
+      "rotate": [
+        {"effect": "proof-pushin"},
+        {"effect": "selection-highlight"}
+      ]
+    },
+    "tools": [
+      {"effect": "proof-pushin"}
+    ],
+    "punch": [
+      {"effect": "text-explosion"}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

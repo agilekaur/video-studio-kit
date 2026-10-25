@@ -1,0 +1,63 @@
+{
+  "id": "business-reel",
+  "name": "Business Reel",
+  "bucket": "Talk to camera",
+  "order": 2,
+  "tagline": "The layout switches on every cut: you, split screen, full product.",
+  "best_for": "Explaining an offer, a product or a process to buyers.",
+  "look": "Something changes on nearly every line. The frame swaps between a split (screen over speaker), a punched-in speaker and a full product screen, with a mono caption pinned to the seam. Results land as a highlighted proof page, and steps tick off in an app window.",
+  "signature": [
+    "layout-switcher",
+    "seam-caption-mono",
+    "proof-pushin",
+    "mock-app-window"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "brand",
+    "caption_words": 3,
+    "grade": "punchy"
+  },
+  "pace": {
+    "big_every": 4.5,
+    "min_gap": 1.0,
+    "punch": "every",
+    "punch_scale": 1.1
+  },
+  "beats": {
+    "hook": [
+      {"effect": "layout-switcher"}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "layout-switcher"},
+        {"effect": "digital-zoom", "params": { "scale": "1.25", "mode": "plain" }},
+        {"effect": "seam-caption-mono"},
+        {"effect": "none"}
+      ]
+    },
+    "contrast": [
+      {"effect": "before-after"}
+    ],
+    "list": [
+      {"effect": "mock-app-window"}
+    ],
+    "proof": [
+      {"effect": "chart-grow", "if": "growth"},
+      {"effect": "proof-pushin"}
+    ],
+    "tools": {
+      "rotate": [
+        {"effect": "layout-switcher"},
+        {"effect": "seam-caption-mono"}
+      ]
+    },
+    "punch": [
+      {"effect": "digital-zoom", "params": { "scale": "1.40", "mode": "plain" }}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

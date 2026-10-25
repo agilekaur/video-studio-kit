@@ -1,0 +1,62 @@
+{
+  "id": "teardown",
+  "name": "Teardown",
+  "bucket": "Proof and numbers",
+  "order": 13,
+  "tagline": "Someone's site, ad or funnel on screen, marked up live.",
+  "best_for": "Critiques, \"what this brand gets right\", funnel and landing page breakdowns.",
+  "look": "The page is the star. Lines get selected as you say them, the camera pushes in on the exact sentence you're critiquing, and the frame freezes for numbered callouts. Hand-drawn arrows point back at you for the verdict.",
+  "signature": [
+    "selection-highlight",
+    "proof-pushin",
+    "freeze-label",
+    "arrows-labels"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "boxed",
+    "caption_words": 3,
+    "grade": "none"
+  },
+  "pace": {
+    "big_every": 5,
+    "min_gap": 1.2,
+    "punch": "alternate",
+    "punch_scale": 1.1
+  },
+  "beats": {
+    "hook": [
+      {"effect": "selection-highlight"}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "selection-highlight"},
+        {"effect": "none"},
+        {"effect": "arrows-labels"},
+        {"effect": "none"}
+      ]
+    },
+    "contrast": [
+      {"effect": "before-after"}
+    ],
+    "list": [
+      {"effect": "freeze-label"}
+    ],
+    "proof": {
+      "rotate": [
+        {"effect": "proof-pushin"},
+        {"effect": "selection-highlight"}
+      ]
+    },
+    "tools": [
+      {"effect": "selection-highlight"}
+    ],
+    "punch": [
+      {"effect": "spotlight"}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

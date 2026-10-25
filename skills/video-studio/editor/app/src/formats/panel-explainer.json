@@ -1,0 +1,54 @@
+{
+  "id": "panel-explainer",
+  "name": "Panel Explainer",
+  "bucket": "Explainers",
+  "order": 7,
+  "tagline": "You in a panel at the bottom, the explanation animating above.",
+  "best_for": "Teaching a concept, a framework or a process step by step.",
+  "look": "Your video sits in a rounded panel in the lower half, in the same place every beat. Above it the idea builds: numbered steps join up, numbers count up, two sides compare, the key line is set large. Cuts feel seamless because only the top changes.",
+  "signature": [
+    "panel-explainer",
+    "title-lockup",
+    "kinetic-cta"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "bold",
+    "caption_words": 3,
+    "grade": "none"
+  },
+  "pace": {
+    "big_every": 8,
+    "min_gap": 2.0,
+    "punch": "none",
+    "punch_scale": 1.0
+  },
+  "beats": {
+    "hook": [
+      {"effect": "panel-explainer", "params": { "kind": "quote" }}
+    ],
+    "point": [
+      {"effect": "panel-explainer", "params": { "kind": "auto" }}
+    ],
+    "contrast": [
+      {"effect": "panel-explainer", "params": { "kind": "compare" }}
+    ],
+    "list": [
+      {"effect": "panel-explainer", "params": { "kind": "steps" }, "if": "items"},
+      {"effect": "panel-explainer", "params": { "kind": "auto" }}
+    ],
+    "proof": [
+      {"effect": "panel-explainer", "params": { "kind": "stat" }}
+    ],
+    "tools": [
+      {"effect": "panel-explainer", "params": { "kind": "auto" }}
+    ],
+    "punch": [
+      {"effect": "panel-explainer", "params": { "kind": "quote" }}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "prompt-reel",
+  "name": "Prompt Reel",
+  "bucket": "Tools and product",
+  "order": 14,
+  "tagline": "The prompt types, the countdown runs, the result lands.",
+  "best_for": "\"Steal this prompt\", AI workflows and before-you-know-it automations.",
+  "look": "The top half is the machine at work: a prompt types and sends, a countdown runs, a result springs in, or a chat plays out on a phone. You sit below the seam with mono captions. Steps tick off in an app window.",
+  "signature": [
+    "prompt-countdown-result",
+    "phone-chat",
+    "seam-caption-mono",
+    "mock-app-window"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "brand",
+    "caption_words": 3,
+    "grade": "none"
+  },
+  "pace": {
+    "big_every": 5,
+    "min_gap": 1.2,
+    "punch": "alternate",
+    "punch_scale": 1.1
+  },
+  "beats": {
+    "hook": [
+      {"effect": "prompt-countdown-result"}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "seam-caption-mono"},
+        {"effect": "none"},
+        {"effect": "digital-zoom", "params": { "scale": "1.25", "mode": "plain" }}
+      ]
+    },
+    "contrast": [
+      {"effect": "before-after"}
+    ],
+    "list": [
+      {"effect": "mock-app-window"}
+    ],
+    "proof": [
+      {"effect": "proof-pushin"}
+    ],
+    "tools": {
+      "rotate": [
+        {"effect": "prompt-countdown-result"},
+        {"effect": "phone-chat"}
+      ]
+    },
+    "punch": [
+      {"effect": "digital-zoom", "params": { "scale": "1.40", "mode": "plain" }}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Video Studio</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0e0f12; color: #e8e8ea; font: 14px -apple-system, system-ui, sans-serif; }
+  body { display: grid; place-items: center; -webkit-app-region: drag; }
+  .box { text-align: center; }
+  h1 { font-size: 20px; font-weight: 600; margin: 0 0 10px; }
+  p { color: #8b8d95; margin: 0; }
+  .bar { width: 160px; height: 3px; margin: 18px auto 0; background: #22242a; border-radius: 2px; overflow: hidden; }
+  .bar i { display: block; width: 40%; height: 100%; background: #e8e8ea; animation: s 1.2s ease-in-out infinite; }
+  @keyframes s { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+</style></head>
+<body><div class="box"><h1>Video Studio</h1><p id="s">Starting…</p><div class="bar"><i></i></div></div>
+<script>window.setStatus = (t) => { document.getElementById("s").textContent = t; };</script>
+</body></html>

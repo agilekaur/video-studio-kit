@@ -1,0 +1,33 @@
+{
+  "name": "video-studio-desktop",
+  "productName": "Video Studio",
+  "private": true,
+  "version": "0.3.0",
+  "description": "Mac app shell for the Video Studio editor",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac dir"
+  },
+  "devDependencies": {
+    "electron": "44.5.1",
+    "electron-builder": "26.17.0"
+  },
+  "build": {
+    "appId": "local.videostudio.editor",
+    "productName": "Video Studio",
+    "files": ["main.js", "preload.js", "splash.html", "package.json"],
+    "directories": { "output": "dist" },
+    "mac": {
+      "target": "dir",
+      "category": "public.app-category.video",
+      "identity": null,
+      "extendInfo": {
+        "CFBundleDocumentTypes": [
+          { "CFBundleTypeName": "Media", "CFBundleTypeRole": "Viewer", "LSHandlerRank": "Alternate",
+            "LSItemContentTypes": ["public.movie", "public.image", "public.audio"] }
+        ]
+      }
+    }
+  }
+}

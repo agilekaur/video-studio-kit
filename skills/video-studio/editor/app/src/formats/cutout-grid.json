@@ -1,0 +1,60 @@
+{
+  "id": "cutout-grid",
+  "name": "Cut-out Grid",
+  "bucket": "Cut-out and collage",
+  "order": 12,
+  "tagline": "You, cut out and tiled into a bold grid that reshuffles on the beat.",
+  "best_for": "High-energy hooks, personal brand reels and bold takes.",
+  "look": "Pop-art editorial. You are cut out and repeated across coloured brand tiles that reshuffle on your words: a hero tile with four corners, a 2x2 or a 3x3. Between grids it's you full frame with punch-ins.",
+  "signature": [
+    "cutout-grid",
+    "digital-zoom",
+    "text-explosion",
+    "kinetic-cta"
+  ],
+  "cutout": true,
+  "settings": {
+    "caption_style": "outline",
+    "caption_words": 2,
+    "grade": "punchy"
+  },
+  "pace": {
+    "big_every": 6,
+    "min_gap": 1.5,
+    "punch": "alternate",
+    "punch_scale": 1.12
+  },
+  "beats": {
+    "hook": [
+      {"effect": "cutout-grid", "params": { "layout": "hero" }}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "none"},
+        {"effect": "cutout-grid", "params": { "layout": "2x2" }},
+        {"effect": "digital-zoom", "params": { "scale": "1.25", "mode": "plain" }},
+        {"effect": "cutout-grid", "params": { "layout": "3x3" }}
+      ]
+    },
+    "contrast": [
+      {"effect": "cutout-grid", "params": { "layout": "2x2" }}
+    ],
+    "list": [
+      {"effect": "freeze-label"}
+    ],
+    "proof": [
+      {"effect": "chart-grow", "if": "growth"},
+      {"effect": "text-explosion"}
+    ],
+    "tools": [
+      {"effect": "cutout-grid", "params": { "layout": "hero" }}
+    ],
+    "punch": [
+      {"effect": "text-explosion"}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "reply-to-comment",
+  "name": "Reply to a Comment",
+  "bucket": "Engagement",
+  "order": 15,
+  "tagline": "The comment you're answering, pinned at the top the whole way.",
+  "best_for": "Answering real questions from your audience, FAQs and objections.",
+  "look": "A clean comment card springs in above your head and stays pinned there while you answer. Steps get a checklist, numbers get a glass counter, and the close points them to comment their own question.",
+  "signature": [
+    "comment-pin",
+    "checklist",
+    "glass-stat",
+    "outro-comment-ui"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "bold",
+    "caption_words": 3,
+    "grade": "warm"
+  },
+  "pace": {
+    "big_every": 7,
+    "min_gap": 1.5,
+    "punch": "alternate",
+    "punch_scale": 1.1,
+    "punch_on": [
+      "comment-pin"
+    ]
+  },
+  "beats": {
+    "hook": [
+      {"effect": "comment-pin", "params": { "mode": "enter" }}
+    ],
+    "point": [
+      {"effect": "comment-pin", "params": { "mode": "hold" }}
+    ],
+    "contrast": [
+      {"effect": "comment-pin", "params": { "mode": "hold" }}
+    ],
+    "list": [
+      {"effect": "checklist", "if": "items"},
+      {"effect": "comment-pin", "params": { "mode": "hold" }}
+    ],
+    "proof": [
+      {"effect": "glass-stat", "if": "number"},
+      {"effect": "comment-pin", "params": { "mode": "hold" }}
+    ],
+    "tools": [
+      {"effect": "comment-pin", "params": { "mode": "hold" }}
+    ],
+    "punch": [
+      {"effect": "spotlight"}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

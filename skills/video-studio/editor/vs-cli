@@ -1,0 +1,39 @@
+#!/bin/bash
+# vs: the Video Studio command (installed as `vs` by the kit's install.sh).
+#
+#   vs open                          start the editor and open it in your browser
+#   vs formats                       list the reel formats
+#   vs edit <clip> [format]          edit a clip end to end into a format (no format: list them)
+#   vs demo                          edit the demo clip as a Founder Story
+#   vs stop                          stop the editor
+set -e
+HERE="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null || echo "${BASH_SOURCE[0]}")")" && pwd)"
+PORT="${PORT:-5178}"
+URL="http://127.0.0.1:$PORT"
+LOG="${VS_HOME:-$HOME/Movies/VideoStudio}/editor.log"
+
+up() { curl -fs "$URL/api/formats" >/dev/null 2>&1; }
+start() {
+  up && return 0
+  mkdir -p "$(dirname "$LOG")"
+  echo "Starting the Video Studio editor…"
+  nohup "$HERE/run.sh" >"$LOG" 2>&1 &
+  for _ in $(seq 1 180); do up && return 0; sleep 1; done
+  echo "The editor didn't start. See $LOG"; exit 1
+}
+
+case "${1:-help}" in
+  open) start; open "$URL" ;;
+  formats) start; python3 "$HERE/edit.py" --list ;;
+  edit)
+    [ -n "$2" ] || { echo "Usage: vs edit <clip> [format]"; exit 2; }
+    start
+    if [ -z "$3" ]; then python3 "$HERE/edit.py" --list; echo; echo "Pick one: vs edit \"$2\" <format>"; exit 0; fi
+    python3 "$HERE/edit.py" --format "$3" "$2" && open "$URL" ;;
+  demo)
+    DEMO="${VS_HOME:-$HOME/Movies/VideoStudio}/_demo/demo.mp4"
+    [ -f "$DEMO" ] || { echo "No demo clip at $DEMO"; exit 1; }
+    start; python3 "$HERE/edit.py" --format founder-story --name "Demo" "$DEMO" && open "$URL" ;;
+  stop) lsof -ti ":$PORT" | xargs kill 2>/dev/null && echo "Stopped." || echo "Not running." ;;
+  *) sed -n '2,8p' "$0" ;;
+esac

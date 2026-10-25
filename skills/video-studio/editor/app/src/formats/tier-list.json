@@ -1,0 +1,60 @@
+{
+  "id": "tier-list",
+  "name": "Tier List",
+  "bucket": "Lists and rankings",
+  "order": 11,
+  "tagline": "An S-to-D tier board that fills up live as you rank things.",
+  "best_for": "Ranking tools, tactics, hires, channels: anything people argue about.",
+  "look": "The tier board sits on top with you below the seam, and it stays on screen the whole reel. Each thing you rank flies into its row the moment you name it, and the board keeps every earlier pick, so the final frame is the full ranking.",
+  "signature": [
+    "tier-list",
+    "title-lockup",
+    "kinetic-cta"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "bold",
+    "caption_words": 3,
+    "grade": "punchy"
+  },
+  "pace": {
+    "big_every": 3,
+    "min_gap": 0,
+    "punch": "none",
+    "punch_scale": 1.0,
+    "exempt": [
+      "tier-list"
+    ]
+  },
+  "beats": {
+    "hook": [
+      {"effect": "tier-list", "params": { "hold": "yes" }}
+    ],
+    "point": [
+      {"effect": "tier-list", "if": "tier"},
+      {"effect": "tier-list", "params": { "hold": "yes" }}
+    ],
+    "contrast": [
+      {"effect": "tier-list", "if": "tier"},
+      {"effect": "tier-list", "params": { "hold": "yes" }}
+    ],
+    "list": [
+      {"effect": "tier-list"}
+    ],
+    "proof": [
+      {"effect": "tier-list", "if": "tier"},
+      {"effect": "tier-list", "params": { "hold": "yes" }}
+    ],
+    "tools": [
+      {"effect": "tier-list"}
+    ],
+    "punch": [
+      {"effect": "tier-list", "if": "tier"},
+      {"effect": "tier-list", "params": { "hold": "yes" }}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

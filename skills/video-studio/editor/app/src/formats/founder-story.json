@@ -1,0 +1,58 @@
+{
+  "id": "founder-story",
+  "name": "Founder Story",
+  "bucket": "Talk to camera",
+  "order": 1,
+  "tagline": "You, full frame, with punch-ins and one big headline.",
+  "best_for": "Lessons, opinions, behind-the-scenes and how-I-got-here stories.",
+  "look": "Full frame the whole way. A two-line headline opens, the frame punches in on every other line, a spotlight lands the punch line and the closing line hits word by word. Few graphics, so the story carries it.",
+  "signature": [
+    "title-lockup",
+    "digital-zoom",
+    "spotlight",
+    "kinetic-cta"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "bold",
+    "caption_words": 2,
+    "grade": "warm"
+  },
+  "pace": {
+    "big_every": 9,
+    "min_gap": 2.0,
+    "punch": "alternate",
+    "punch_scale": 1.12
+  },
+  "beats": {
+    "hook": [
+      {"effect": "title-lockup"}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "none"},
+        {"effect": "digital-zoom", "params": { "scale": "1.10", "mode": "stepped" }}
+      ]
+    },
+    "contrast": [
+      {"effect": "spotlight"}
+    ],
+    "list": [
+      {"effect": "freeze-label"}
+    ],
+    "proof": [
+      {"effect": "chart-grow", "if": "growth"},
+      {"effect": "spotlight"}
+    ],
+    "tools": [
+      {"effect": "digital-zoom", "params": { "scale": "1.25", "mode": "plain" }}
+    ],
+    "punch": [
+      {"effect": "spotlight"}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "visual-essay",
+  "name": "Visual Essay",
+  "bucket": "Explainers",
+  "order": 6,
+  "tagline": "You cut out over the evidence, in black and one accent colour.",
+  "best_for": "Big-picture takes, industry shifts, \"here's what's really happening\".",
+  "look": "Moody and editorial. A masthead word sits behind your head, keyword walls scroll behind you, and you drop onto torn paper for the sharp lines. Evidence (pages, highlighted lines) fills the top while you talk below.",
+  "signature": [
+    "cover-story",
+    "headline-wall",
+    "paper-cut",
+    "proof-pushin"
+  ],
+  "cutout": true,
+  "settings": {
+    "caption_style": "clean",
+    "caption_words": 3,
+    "grade": "moody"
+  },
+  "pace": {
+    "big_every": 5.5,
+    "min_gap": 1.5,
+    "punch": "alternate",
+    "punch_scale": 1.08
+  },
+  "beats": {
+    "hook": [
+      {"effect": "headline-wall", "needs": "cutout", "params": { "theme": "night" }},
+      {"effect": "cover-story"}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "headline-wall", "needs": "cutout", "params": { "theme": "night" }},
+        {"effect": "none"},
+        {"effect": "selection-highlight"},
+        {"effect": "none"}
+      ]
+    },
+    "contrast": [
+      {"effect": "paper-cut", "needs": "cutout"},
+      {"effect": "spotlight"}
+    ],
+    "list": [
+      {"effect": "freeze-label"}
+    ],
+    "proof": {
+      "rotate": [
+        {"effect": "proof-pushin"},
+        {"effect": "selection-highlight"}
+      ]
+    },
+    "tools": [
+      {"effect": "selection-highlight"}
+    ],
+    "punch": {
+      "rotate": [
+        {"effect": "paper-cut", "needs": "cutout"},
+        {"effect": "text-explosion"}
+      ]
+    },
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

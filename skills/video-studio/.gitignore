@@ -1,0 +1,13 @@
+# installed dependencies (recreated by editor/run.sh)
+editor/.venv/
+node_modules/
+# build output and caches
+editor/app/dist/
+editor/app/.cache/
+editor/desktop/dist/
+__pycache__/
+*.pyc
+.DS_Store
+# downloaded model (editor/run.sh fetches it)
+editor/models/*.onnx
+editor/app/dist-preview/

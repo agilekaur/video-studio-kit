@@ -1,0 +1,57 @@
+{
+  "id": "case-study",
+  "name": "Case Study",
+  "bucket": "Proof and numbers",
+  "order": 3,
+  "tagline": "Problem, what we did, the number. Every claim gets a receipt on screen.",
+  "best_for": "Client wins, before-and-after results, \"how we got X\" stories.",
+  "look": "The problem is told straight to camera, the fix ticks off in an app window, and the result arrives as a growing chart or a proof page that pushes in on the exact line you say. Before and after gets a wipe, and the number gets a spotlight.",
+  "signature": [
+    "chart-grow",
+    "proof-pushin",
+    "before-after",
+    "mock-app-window"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "boxed",
+    "caption_words": 3,
+    "grade": "none"
+  },
+  "pace": {
+    "big_every": 6,
+    "min_gap": 1.5,
+    "punch": "alternate",
+    "punch_scale": 1.1
+  },
+  "beats": {
+    "hook": [
+      {"effect": "before-after"}
+    ],
+    "point": [
+      {"effect": "none"}
+    ],
+    "contrast": [
+      {"effect": "before-after"}
+    ],
+    "list": [
+      {"effect": "mock-app-window"}
+    ],
+    "proof": {
+      "rotate": [
+        {"effect": "chart-grow", "if": "growth"},
+        {"effect": "proof-pushin"}
+      ]
+    },
+    "tools": [
+      {"effect": "mock-app-window"}
+    ],
+    "punch": [
+      {"effect": "spotlight"}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}

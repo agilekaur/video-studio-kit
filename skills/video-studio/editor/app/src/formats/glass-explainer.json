@@ -1,0 +1,62 @@
+{
+  "id": "glass-explainer",
+  "name": "Glass Explainer",
+  "bucket": "Explainers",
+  "order": 8,
+  "tagline": "Frosted glass cards, counters that tick up, graphs that draw themselves.",
+  "best_for": "Explaining numbers, results and trends without losing your face.",
+  "look": "Soft, premium and calm. Numbers land on frosted-glass cards beside your face and count up as you say them, with a line or ring drawing underneath. The hook word is set as refractive glass. Captions are soft glass pills.",
+  "signature": [
+    "glass-stat",
+    "glass-type",
+    "chart-grow",
+    "popups"
+  ],
+  "cutout": false,
+  "settings": {
+    "caption_style": "glass",
+    "caption_words": 3,
+    "grade": "soft"
+  },
+  "pace": {
+    "big_every": 6,
+    "min_gap": 1.5,
+    "punch": "alternate",
+    "punch_scale": 1.08
+  },
+  "beats": {
+    "hook": [
+      {"effect": "glass-type"}
+    ],
+    "point": {
+      "rotate": [
+        {"effect": "none"},
+        {"effect": "glass-stat", "if": "number"},
+        {"effect": "none"}
+      ]
+    },
+    "contrast": [
+      {"effect": "before-after"}
+    ],
+    "list": [
+      {"effect": "popups"}
+    ],
+    "proof": {
+      "rotate": [
+        {"effect": "glass-stat"},
+        {"effect": "chart-grow", "if": "growth"},
+        {"effect": "glass-stat"}
+      ]
+    },
+    "tools": [
+      {"effect": "popups", "params": { "variant": "plugin" }}
+    ],
+    "punch": [
+      {"effect": "glass-type"}
+    ],
+    "cta": [
+      {"effect": "outro-comment-ui", "if": "keyword"},
+      {"effect": "kinetic-cta"}
+    ]
+  }
+}
