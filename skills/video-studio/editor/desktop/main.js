@@ -95,7 +95,7 @@ async function prepare(env, status) {
     status("First run: setting up Python (a few minutes)…");
     await run("python3", ["-m", "venv", ".venv"], { cwd: EDITOR, env });
     await run(path.join(EDITOR, ".venv", "bin", "pip"),
-      ["install", "-q", "flask", "faster-whisper", "pillow", "numpy", "fonttools", "brotli", "pypdf", "onnxruntime"], { cwd: EDITOR, env });
+      ["install", "-q", "-r", "requirements.txt"], { cwd: EDITOR, env }); // pinned versions (see requirements.txt)
   }
   const appDir = path.join(EDITOR, "app");
   if (!fs.existsSync(path.join(appDir, "node_modules"))) {
@@ -143,7 +143,7 @@ function stopBackend() {
 
 function createWindow() {
   win = new BrowserWindow({
-    width: 1600, height: 1000, minWidth: 1100, minHeight: 700,
+    width: 1600, height: 1000, minWidth: 860, minHeight: 620,
     title: "Video Studio", backgroundColor: "#0e0f12", show: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),

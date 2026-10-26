@@ -206,7 +206,7 @@ function ItemInspector({ project, sel, actions }) {
   );
 }
 
-function ProjectInspector({ project, actions, store }) {
+function ProjectInspector({ project, actions, store, brand }) {
   const st = project.settings;
   const set = actions.setSettings;
   return (
@@ -215,7 +215,7 @@ function ProjectInspector({ project, actions, store }) {
       <Field label="Style"><select value={st.caption_style} onChange={(e) => set({ caption_style: e.target.value })}>{Object.entries(CAPTION_STYLES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></Field>
       <Field label="Words per caption"><Seg value={+st.caption_words || 3} options={[[1, "1"], [2, "2"], [3, "3"], [4, "4"]]} onChange={(v) => set({ caption_words: v })} /></Field>
       <Field label={`Height: ${st.caption_y}`}><input type="range" min={600} max={1500} step={10} value={st.caption_y} onChange={(e) => set({ caption_y: +e.target.value })} /></Field>
-      <Field label="Active word colour"><div className="row"><input type="color" value={st.accent || "#FFD400"} onChange={(e) => set({ accent: e.target.value })} />
+      <Field label="Active word colour"><div className="row"><input type="color" value={st.accent || (brand && brand.colors && (brand.colors.caption_active || brand.colors.accent)) || "#FFD400"} onChange={(e) => set({ accent: e.target.value })} />
         {st.accent ? <button className="btn ghost small" onClick={() => set({ accent: "" })}>Use brand</button> : <span className="muted small">from brand</span>}</div></Field>
 
       <div className="section">Pace</div>

@@ -3,7 +3,7 @@ import { useProject, api, uid } from "./store.js";
 import { frameBus, FPS, beatText } from "./util.js";
 import { computeTimeline, pacingWarnings, isFiller } from "../remotion/timeline.js";
 import { CATALOG } from "../remotion/effects/index.js";
-import { FORMAT_BY_ID } from "../formats/index.js";
+import { FORMATS, FORMAT_BY_ID } from "../formats/index.js";
 import { PlayerView } from "./PlayerView.jsx";
 import { Timeline } from "./Timeline.jsx";
 import { Inspector } from "./Inspector.jsx";
@@ -257,10 +257,20 @@ export function App() {
     return () => { offMenu(); offFiles(); };
   }, []);
 
+  const [inspOpen, setInspOpen] = useState(false);
+  const pickFormat = async (id) => {
+    try {
+      fromServer(await api("POST", `/api/projects/${project.id}/format`, { format: id }), { replace: true });
+      const f = FORMAT_BY_ID[id];
+      toast(f ? `${f.name} applied to every beat. Cmd+Z to undo.` : "Format cleared. Beats re-planned with the classic planner.");
+    } catch (e) { toast("Couldn't apply the format: " + e.message, "err"); }
+  };
+  const buckets = [...new Set(FORMATS.map((f) => f.bucket))];
+
   const ctx = { project, brand, tl, mutate, actions, sel, setSel, wordSel, setWordSel, seek, view, setView, warnings, store, fromServer, uploadClips, playerRef, setLeftTab };
 
   return (
-    <div className="app">
+    <div className={"app" + (inspOpen ? " insp-open" : "")}>
       <header className="top">
         <div className="logo">Video Studio</div>
         <select className="sel" value={project ? project.id : ""} onChange={(e) => e.target.value && open(e.target.value)}>
@@ -268,15 +278,20 @@ export function App() {
           {projects.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
         </select>
         <button className="btn ghost" onClick={newProject}>New</button>
+        {project ? <select className="sel fmtsel" title="Reel format: re-plans every beat" value={project.settings.format || ""} onChange={(e) => pickFormat(e.target.value)}>
+          <option value="">Format: none</option>
+          {buckets.map((b) => <optgroup key={b} label={b}>{FORMATS.filter((f) => f.bucket === b).map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}</optgroup>)}
+        </select> : null}
         {project ? <input className="pname" value={project.name} onChange={(e) => mutate((d) => { d.name = e.target.value; }, { history: false })} onBlur={refreshProjects} /> : null}
         <div className="hist">
           <button className="btn ghost icon" title="Undo (Cmd+Z)" disabled={!store.canUndo} onClick={undo}>↶</button>
           <button className="btn ghost icon" title="Redo (Cmd+Shift+Z)" disabled={!store.canRedo} onClick={redo}>↷</button>
         </div>
-        <span className="muted small">{saveState}</span>
+        <span className="muted small savestate">{saveState}</span>
         <div className="grow" />
         {brand ? <span className="brandchip" onClick={() => setLeftTab("brand")} title="Brand kit">
-          <i style={{ background: brand.colors && brand.colors.accent }} />{brand.name}</span> : null}
+          <i style={{ background: brand.colors && brand.colors.accent }} /><span className="bname">{brand.name}</span></span> : null}
+        <button className="btn ghost insp-toggle" onClick={() => setInspOpen((v) => !v)} aria-pressed={inspOpen}>{inspOpen ? "Close panel" : "Inspector"}</button>
         <button className="btn ghost" disabled={!tl || !tl.segments.length} onClick={() => startRender(true)}>Render preview</button>
         <button className="btn primary" disabled={!tl || !tl.segments.length} onClick={() => startRender(false)}>Export</button>
       </header>
