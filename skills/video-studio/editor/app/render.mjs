@@ -1,5 +1,6 @@
 // Render a project with Remotion. Usage:
 //   node render.mjs props.json out.mp4 [--scale 0.5] [--still frame out.png]
+//   node render.mjs --bundle-only
 // Prints JSON lines: {"progress":0.42} ... {"done":true}
 import { bundle } from "@remotion/bundler";
 import { renderMedia, renderStill, selectComposition, ensureBrowser } from "@remotion/renderer";
@@ -15,11 +16,12 @@ const scale = +opt("--scale", 1);
 const still = rest.includes("--still") ? opt("--still") : null;
 const log = (o) => process.stdout.write(JSON.stringify(o) + "\n");
 
+// Content hash, so a bundle built before packaging stays valid after the app is copied elsewhere.
 function srcHash(dir) {
   const h = crypto.createHash("md5");
   const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).forEach((e) => {
     const p = path.join(d, e.name);
-    if (e.isDirectory()) walk(p); else h.update(p + fs.statSync(p).mtimeMs);
+    if (e.isDirectory()) walk(p); else h.update(path.relative(dir, p)).update(fs.readFileSync(p));
   });
   walk(dir);
   return h.digest("hex").slice(0, 12);
@@ -32,6 +34,12 @@ async function getBundle() {
   log({ stage: "bundling" });
   fs.rmSync(path.join(here, ".cache"), { recursive: true, force: true });
   return bundle({ entryPoint: path.join(here, "src", "remotion", "index.jsx"), outDir: dir, onProgress: () => {} });
+}
+
+if (propsPath === "--bundle-only") {   // packaging: build the bundle ahead of the first render
+  await getBundle();
+  log({ done: true });
+  process.exit(0);
 }
 
 try {

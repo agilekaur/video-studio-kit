@@ -11,3 +11,4 @@ __pycache__/
 # downloaded model (editor/run.sh fetches it)
 editor/models/*.onnx
 editor/app/dist-preview/
+editor/desktop/.build-cache/

@@ -8,7 +8,12 @@ const net = require("net");
 const os = require("os");
 const path = require("path");
 
-const EDITOR = findEditor();
+// Customer builds carry everything in Contents/Resources/runtime (Python, ffmpeg, the editor and its Node
+// packages). It is copied once into Application Support, where the editor can write its caches.
+const BUNDLED = path.join(process.resourcesPath || "", "runtime");
+const PACKAGED = app.isPackaged && fs.existsSync(path.join(BUNDLED, "editor", "server.py"));
+const RUNTIME = path.join(os.homedir(), "Library", "Application Support", "Video Studio", "runtime-" + app.getVersion());
+const EDITOR = PACKAGED ? path.join(RUNTIME, "editor") : findEditor();
 const VS_HOME = process.env.VS_HOME || path.join(os.homedir(), "Movies", "VideoStudio");
 const LOG = path.join(os.homedir(), "Library", "Logs", "Video Studio.log");
 
@@ -46,6 +51,7 @@ function loginPath() {
 }
 
 function log(line) {
+  try { fs.mkdirSync(path.dirname(LOG), { recursive: true }); } catch (e) { /* ignore */ }
   try { fs.appendFileSync(LOG, line.endsWith("\n") ? line : line + "\n"); } catch (e) { /* ignore */ }
 }
 
@@ -88,6 +94,32 @@ async function waitForServer(url, ms) {
   throw new Error("The backend did not answer in time. See ~/Library/Logs/Video Studio.log");
 }
 
+// First launch of a customer build: clone the bundled runtime out of the app (APFS clone, so no extra disk
+// space), drop the download quarantine so its tools can run, and remove runtimes left by older versions.
+async function ensureRuntime(status) {
+  const ready = path.join(RUNTIME, ".ready");
+  if (!fs.existsSync(ready)) await copyRuntime(status, ready);
+  // `node` for the renderer is this app's own Electron binary in Node mode. Written on every launch, since the
+  // app may have moved (for example from Downloads into Applications).
+  fs.writeFileSync(path.join(RUNTIME, "bin", "node"),
+    `#!/bin/sh\nELECTRON_RUN_AS_NODE=1 exec "${process.execPath}" "$@"\n`, { mode: 0o755 });
+}
+
+async function copyRuntime(status, ready) {
+  status("Setting up Video Studio (one time)…");
+  const parent = path.dirname(RUNTIME);
+  fs.mkdirSync(parent, { recursive: true });
+  for (const e of fs.readdirSync(parent)) {
+    if (e.startsWith("runtime-")) fs.rmSync(path.join(parent, e), { recursive: true, force: true });
+  }
+  const tmp = RUNTIME + ".part";
+  try { await run("/bin/cp", ["-cpR", BUNDLED, tmp], {}); }
+  catch (e) { fs.rmSync(tmp, { recursive: true, force: true }); await run("/bin/cp", ["-pR", BUNDLED, tmp], {}); }
+  await run("/usr/bin/xattr", ["-dr", "com.apple.quarantine", tmp], {}).catch(() => {});
+  fs.renameSync(tmp, RUNTIME);
+  fs.writeFileSync(ready, app.getVersion());
+}
+
 // Same steps as run.sh: venv on first run, npm install if needed, build the app when src changed.
 async function prepare(env, status) {
   const py = path.join(EDITOR, ".venv", "bin", "python");
@@ -112,9 +144,19 @@ async function prepare(env, status) {
 }
 
 async function startBackend() {
-  const env = { ...process.env, PATH: loginPath(), VS_HOME, PYTHONUNBUFFERED: "1" };
   const status = (s) => win && !win.isDestroyed() && win.webContents.executeJavaScript(`window.setStatus && setStatus(${JSON.stringify(s)})`).catch(() => {});
-  const py = await prepare(env, status);
+  let env, py;
+  if (PACKAGED) {
+    await ensureRuntime(status);
+    // only the bundled tools: nothing from Homebrew or the user's own Python leaks in
+    env = { ...process.env, PATH: [path.join(RUNTIME, "bin"), "/usr/bin", "/bin", "/usr/sbin", "/sbin"].join(":"),
+            VS_HOME, PYTHONUNBUFFERED: "1", PYTHONNOUSERSITE: "1", NODE_PATH: "" };
+    delete env.PYTHONPATH; delete env.PYTHONHOME;
+    py = path.join(RUNTIME, "python", "bin", "python3");
+  } else {
+    env = { ...process.env, PATH: loginPath(), VS_HOME, PYTHONUNBUFFERED: "1" };
+    py = await prepare(env, status);
+  }
   status("Starting…");
   const port = await freePort();
   env.PORT = String(port);

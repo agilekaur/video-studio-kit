@@ -7,6 +7,9 @@ MP4. Then you fine-tune anything yourself in an editor in your browser.
 
 It is free. It runs on your Mac. Your footage stays on your Mac.
 
+**Don't use Claude Code?** Get [Video Studio for Mac](https://www.agilekaur.com/resources/video-studio-app), the same editor as
+a regular app. No Terminal needed.
+
 ## What is inside
 
 * **Two Claude Code skills.** `/video-brand-kit` builds your brand kit with you (colours, fonts, logo, caption

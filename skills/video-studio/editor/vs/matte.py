@@ -10,6 +10,8 @@ import subprocess
 import numpy as np
 
 MODEL = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "models", "rvm_mobilenetv3_fp32.onnx")
+# fetched from the official release on first use (GPL-3.0, not shipped with the Mac app)
+MODEL_URL = "https://github.com/PeterL1n/RobustVideoMatting/releases/download/v1.0.0/rvm_mobilenetv3_fp32.onnx"
 MW, MH = 720, 1280
 
 _sess = None
@@ -19,8 +21,26 @@ def session():
     global _sess
     if _sess is None:
         import onnxruntime as ort
+        if not os.path.exists(MODEL):
+            download_model()
         _sess = ort.InferenceSession(MODEL, providers=["CPUExecutionProvider"])
     return _sess
+
+
+def download_model():
+    import ssl
+    import urllib.request
+    try:
+        import certifi
+        ctx = ssl.create_default_context(cafile=certifi.where())
+    except ImportError:
+        ctx = ssl.create_default_context()
+    os.makedirs(os.path.dirname(MODEL), exist_ok=True)
+    tmp = MODEL + ".part"
+    with urllib.request.urlopen(MODEL_URL, context=ctx, timeout=120) as r, open(tmp, "wb") as f:
+        while chunk := r.read(1 << 20):
+            f.write(chunk)
+    os.replace(tmp, MODEL)
 
 
 def make_matte(src, out, duration, progress=lambda p: None, cancel=lambda: False):
